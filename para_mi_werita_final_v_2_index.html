@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para mi werita — 12 razones por las que te amo 💛</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --yellow:#F7C948; --brown:#6B4E16; --cream:#FFF7DA; --ink:#443F3A; --shadow:0 10px 30px rgba(0,0,0,.08); }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:'Nunito',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink);
+      background: radial-gradient(1200px 800px at 20% -10%, #fffbe8 0%, var(--cream) 50%, #fdecb8 100%);
+      transition: background .6s ease}
+    body.final{ background: radial-gradient(1100px 700px at 50% 40%, #2f2a20 0%, #3a3020 45%, #241f1a 100%) }
+
+    header{ text-align:center; padding:26px 12px 6px }
+    h1{ font-family:'Great Vibes',cursive; color:var(--brown); margin:0 0 8px; font-size:clamp(36px,7vw,60px) }
+    p.lead{ margin:0; font-weight:700; opacity:.9; text-align:center }
+
+    .container{ width:min(1000px,94vw); margin:16px auto 90px; transition:opacity .35s ease, filter .35s ease, visibility .35s ease }
+    body.final .container{ opacity:0; filter:blur(6px); pointer-events:none; visibility:hidden }
+
+    .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px }
+    @media (max-width:860px){ .grid{ grid-template-columns:repeat(2,1fr) } }
+    @media (max-width:520px){ .grid{ grid-template-columns:1fr } }
+
+    .card{ position:relative; background:#fffef7; border:1px solid rgba(107,78,22,.14); border-radius:18px; text-align:center; box-shadow:0 8px 18px rgba(0,0,0,.08); min-height:120px; overflow:hidden; cursor:pointer }
+    .card .front,.card .back{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:18px }
+    .card .front{ font-weight:800 }
+    .card .back{ background:linear-gradient(180deg,#fff6d7,#fffaf0); transform:translateY(10px) scale(.98); opacity:0; transition:opacity .25s ease, transform .25s ease }
+    .card.revealed .back{ opacity:1; transform:translateY(0) scale(1) }
+    .emoji{ font-size:28px; display:block; margin-bottom:6px }
+
+    .actions{ display:flex; justify-content:center; padding:18px }
+    .btn{ background:linear-gradient(#ffe48f, var(--yellow)); border:none; padding:14px 22px; font-weight:800; border-radius:999px; cursor:pointer; box-shadow:0 12px 20px rgba(247,201,72,.35) }
+
+    /* Escena del ramo */
+    .stage{ position:fixed; inset:0; pointer-events:none; z-index:20 }
+    .bouquet{ position:absolute; left:50%; top:54%; transform:translate(-50%,-50%); width:min(640px,96vw); height:460px; opacity:0; transition:opacity .5s ease; z-index:21 }
+    .bouquet.show{ opacity:1 }
+
+    .vase{ position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:240px; height:140px; background:linear-gradient(180deg,#d5f0e1,#9DBF9E); border:2px solid #6e907b; border-bottom:14px solid #6e907b; border-radius:0 0 42px 42px; box-shadow:0 18px 34px rgba(0,0,0,.2) }
+    .vase-top{ position:absolute; left:50%; transform:translateX(-50%); bottom:136px; width:260px; height:22px; background:#b0d2c2; border:2px solid #6e907b; border-bottom:none; border-radius:14px 14px 0 0; box-shadow:inset 0 4px 10px rgba(0,0,0,.12) }
+    .ribbon{ position:absolute; bottom:154px; left:50%; transform:translateX(-50%) rotate(1deg); width:180px; height:38px; background:linear-gradient(120deg,#ffd56e,#ffb53e); border:1px solid #c98a2b; border-radius:18px; box-shadow:0 6px 14px rgba(0,0,0,.12) }
+    .bow-tail{ position:absolute; width:18px; height:76px; background:linear-gradient(120deg,#ffd56e,#ffb53e); border:1px solid #c98a2b; bottom:112px; border-radius:12px }
+    .bow-tail.left{ left:calc(50% - 48px); transform:skewX(-10deg) }
+    .bow-tail.right{ left:calc(50% + 30px); transform:skewX(10deg) }
+
+    .stem{ position:absolute; width:4px; height:140px; background:#6e907b; border-radius:3px; transform:translate(-50%, 0); box-shadow:0 0 0 10px rgba(157,191,158,.08) }
+    .leaf{ position:absolute; width:26px; height:16px; background:#88b39b; border-radius:16px 16px 16px 0 / 16px 16px 16px 0; transform-origin:left center; opacity:.95; filter:drop-shadow(0 3px 4px rgba(0,0,0,.12)) }
+    .flower-head{ position:absolute; transform:translate(-50%,-50%); filter:drop-shadow(0 8px 12px rgba(0,0,0,.35)) }
+
+    .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(10px); background:#ffffffda; border:1px solid rgba(107,78,22,.15); padding:10px 16px; border-radius:16px; box-shadow:0 10px 20px rgba(0,0,0,.12); font-weight:800; opacity:0; transition:opacity .35s, transform .35s; z-index:30 }
+    .toast.show{ opacity:1; transform:translateX(-50%) translateY(0) }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Para mi werita — 12 razones por las que te amo</h1>
+    <p class="lead">Toca cada tarjeta para revelar un pétalo. Luego <strong>recoge los pétalos</strong> para formar un ramo bonito 💐</p>
+  </header>
+
+  <main class="container">
+    <section class="grid" id="grid" aria-label="Galería 12 razones"></section>
+    <div class="actions">
+      <button class="btn" id="gather" type="button">Recoger pétalos 💐</button>
+    </div>
+  </main>
+
+  <!-- Escena / Ramo -->
+  <div class="stage" aria-hidden="true">
+    <div class="bouquet" id="bouquet">
+      <div class="vase-top"></div>
+      <div class="vase"></div>
+      <div class="ribbon"></div>
+      <div class="bow-tail left"></div>
+      <div class="bow-tail right"></div>
+    </div>
+  </div>
+
+  <!-- Plantilla de flor -->
+  <template id="flowerTpl">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="44" height="44">
+      <defs>
+        <radialGradient id="gY" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff2a8"/>
+          <stop offset="60%" stop-color="#F7C948"/>
+          <stop offset="100%" stop-color="#E0A82F"/>
+        </radialGradient>
+      </defs>
+      <g transform="translate(32 32)">
+        <g>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(0) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(45) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(90) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(135) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(180) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(225) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(270) translate(0 -16)"/>
+          <ellipse rx="10" ry="24" fill="url(#gY)" transform="rotate(315) translate(0 -16)"/>
+        </g>
+        <circle r="10" fill="#6B4E16"/>
+      </g>
+    </svg>
+  </template>
+
+  <div class="toast" id="toast">¡Ramo listo para ti, mi werita! 💛</div>
+
+  <script>
+    // Render dinámico de las tarjetas con click para revelar
+    (function(){
+      const grid = document.getElementById('grid');
+      const razones = [
+        {texto:'Eres el sueño que nunca quiero despertar', emoji:'💤'},
+        {texto:'Me haces creer en el amor verdadero', emoji:'❤️'},
+        {texto:'Cada día contigo es un regalo', emoji:'🎁'},
+        {texto:'Tus abrazos son mi lugar favorito', emoji:'🤗'},
+        {texto:'Tu voz es mi melodía favorita', emoji:'🎶'},
+        {texto:'A tu lado todo tiene sentido', emoji:'✨'},
+        {texto:'Tu ternura derrite mi mundo', emoji:'🌸'},
+        {texto:'Tu mirada me hace sentir paz', emoji:'🌙'},
+        {texto:'Tu sonrisa es mi motor', emoji:'😊'},
+        {texto:'Me inspiras a ser mejor', emoji:'🌟'},
+        {texto:'Amo cada detalle de ti', emoji:'💛'},
+        {texto:'Eres mi siempre y para siempre', emoji:'∞'}
+      ];
+      razones.forEach((r,i)=>{
+        const card=document.createElement('article');
+        card.className='card';
+        card.tabIndex=0;
+        card.innerHTML=`<div class="front">✨ Pétalo ${i+1}</div>
+                         <div class="back"><div><span class=emoji>${r.emoji}</span>${r.texto}</div></div>`;
+        const reveal=()=> card.classList.toggle('revealed');
+        card.addEventListener('click', reveal);
+        card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); reveal(); }});
+        grid.appendChild(card);
+      });
+    })();
+
+    // Ramo y botón
+    (function(){
+      const bouquet = document.getElementById('bouquet');
+      const toast = document.getElementById('toast');
+      const tpl = document.getElementById('flowerTpl');
+      function makeFlower(x,y){ const f=tpl.content.firstElementChild.cloneNode(true); f.className='flower-head'; f.style.left=`calc(50% + ${x}px)`; f.style.top=`${y}px`; f.style.position='absolute'; f.style.transform='translate(-50%,-50%) rotate('+(Math.random()*20-10)+'deg)'; bouquet.appendChild(f); }
+      function makeStem(x,y,h){ const s=document.createElement('div'); s.className='stem'; s.style.left=`calc(50% + ${x}px)`; s.style.top=`${y+10}px`; s.style.height=(h||130)+'px'; bouquet.appendChild(s); }
+      function makeLeaf(x,y,rot){ const l=document.createElement('div'); l.className='leaf'; l.style.left=`calc(50% + ${x}px)`; l.style.top=`${y+56}px`; l.style.transform=`translate(-50%,-50%) rotate(${rot}deg)`; bouquet.appendChild(l); }
+      function buildBouquet(){ bouquet.querySelectorAll('.flower-head,.leaf,.stem').forEach(n=>n.remove()); const rows=[5,4,3]; const baseY=210; rows.forEach((count,row)=>{ const spread=240-row*50; for(let j=0;j<count;j++){ const t=(j/(count-1||1))-.5; const x=t*spread; const y=baseY-row*48-(1-Math.abs(t))*28; makeStem(x,y,150-row*14); makeFlower(x,y); makeLeaf(x-12,y,-35); makeLeaf(x+12,y,40); } }); bouquet.classList.add('show'); }
+      function gather(){ document.body.classList.add('final'); buildBouquet(); toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 2600); }
+      window.gather=gather; const btn=document.getElementById('gather'); if(btn) btn.addEventListener('click', gather);
+    })();
+  </script>
+</body>
+</html>
